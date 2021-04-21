@@ -1,0 +1,102 @@
+
+<div class="navigation col-lg-12">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class= "navbar-header">
+
+        <a href="#" class="navbar-brand">{{title}}</a>
+      </div>
+<!cuando exista identity o este logueado >
+      <ul class= "nav navbar-nav" *ngIf="identity">
+        <li>
+          <a [routerLink]="['/home']" [routerLinkActive]="['active']" >
+            <span class="glyphicon glyphicon-home"></span>
+            Pagina principal
+          </a>
+        </li>
+
+
+        <!--  <li>
+        <a href="#">
+            <span class="glyphicon glyphicon-th-list"></span>
+            Informes
+          </a>
+        </li> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                aria-expanded="false">Productos <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a [routerLink]="['/pssner']">
+              <span class="glyphicon glyphicon-pencil"></span>
+              Crear Producto</a></li>
+
+          </ul>
+        </li>
+
+
+<!cuando no exista identity o no este logueado>
+      </ul>
+
+      <ul class="nav navbar navbar-nav navbar-right" *ngIf= "!identity">
+        <li>
+          <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+            <span class="glyphicon glyphicon-log-in"></span>
+            Login
+          </a>
+        </li>
+
+      </ul>
+
+
+      <! menu del usuario identificado>
+      <ul class="nav navbar navbar-right" *ngIf="identity" >
+        <li class="avatar">
+          <! cargar imagen de usuario >
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" >
+            {{identity.username}} <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+
+            <li>
+              <a [routerLink]="['/mis-datos']">
+                <span class="glyphicon glyphicon-pencil"></span>
+                Mis datos personales
+              </a>
+            </li>
+
+            <li>
+              <a *ngIf="identity.role == 'ROLE_ADMIN'" [routerLink]="['/user-list']">
+                <span class="glyphicon glyphicon-user"></span>
+                Administrar Empleados
+              </a>
+            </li>
+
+
+
+            <li>
+              <a class="pointer" (click)="logout()">
+                <span class="glyphicon glyphicon-log-out"></span>
+                Cerrar sesión
+              </a>
+            </li>
+
+
+
+          </ul>
+
+        </li>
+
+      </ul>
+
+
+
+    </div>
+  </nav>
+</div>
+
+
+<router-outlet></router-outlet>

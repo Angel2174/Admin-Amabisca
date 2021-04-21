@@ -1,0 +1,78 @@
+<div class="col-lg-5">
+    <h1 class="h1-strong">{{title}}</h1>
+
+    <div class="alert alert-success" *ngIf="status == 'success'">
+      Registro completado con éxito.
+    </div>
+
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+      El registro no se completó, correo o usario podría estar en uso.
+    </div>
+
+
+    <form  #registerForm="ngForm" (ngSubmit)="onSubmit()"  class="col-lg-10" >
+      <p>
+          <label>Nombre</label>
+          <input  type="text" name="name" #name="ngModel" [(ngModel)] = "user.name" class="form-control" required />
+          <span *ngIf= "!name.valid && name.touched">
+              El nombre es obligatorio!!
+          </span>
+      </p>
+
+
+      <p>
+          <label>Apellidos</label>
+          <input  type="text" name="surname" #surname="ngModel" [(ngModel)] = "user.surname" class="form-control" required />
+          <span *ngIf= "!surname.valid && surname.touched">
+              Los Apellidos son obligatorio!!
+          </span>
+      </p>
+
+
+      <p>
+          <label>Usuario</label>
+          <input  type="text" name="username" #username="ngModel" [(ngModel)] = "user.username" class="form-control" required />
+          <span *ngIf= "!username.valid && username.touched">
+              El usuario es obligatorio!!
+          </span>
+      </p>
+
+
+      <p>
+          <label>Correo Electronico</label>
+          <input  type="email" name="email" #email="ngModel" [(ngModel)] = "user.email" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+          <span *ngIf= "!email.valid && email.touched">
+              El correo no es correcto!!
+          </span>
+      </p>
+
+
+      <p>
+          <label>Contraseña</label>
+          <input  type="text" name="password" #password="ngModel" [(ngModel)] = "user.password" class="form-control" required pattern="^(?=[^\d_].*?\d)\w(\w|[!@#$%]){7,20}"/>
+          <span *ngIf= "!password.valid && password.touched">
+              La contraseña es obligatorio!!
+          </span>
+      </p>
+
+      <p>
+        <label>Rol</label>
+        <select  type="text" name="role" #role="ngModel" [(ngModel)] = "user.role" class="form-control" required >
+        <option selected="" value="ROLE_USER">ROLE_USER</option>
+        <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+        <option value="ROLE_ADMIN">ROLE_NULO</option>
+        </select>
+        <span *ngIf= "!role.valid && role.touched">
+            El rol es obligatorio!!
+        </span>
+      </p>
+
+      <input type="submit"  value="{{title}}" class="btn btn-success" [disabled] = "!registerForm.form.valid"  />
+  &nbsp;
+      <a class="btn btn-danger" [routerLink]="['/user-list']">
+        Volver
+      </a>
+
+
+    </form>
+</div>
